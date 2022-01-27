@@ -1,21 +1,21 @@
 /*
  * @Date: 2022-01-18 16:32:01
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-01-19 20:12:25
+ * @LastEditTime: 2022-01-26 22:19:04
  * @FilePath: \backend\config\DBHelper.js
  */
 const mongoose = require('mongoose');
-
 const config = require('./index');
-
-const db = mongoose.connect(config.DB_URL);
+mongoose.connect(config.DB_URL);
 
 mongoose.Promise = global.Promise;
 
-mongoose.connection.on('success', () => {
-    console.log('Connect Success');
-})
+const db = mongoose.connection;
 
-mongoose.connection.on('error',
-    console.error.bind(console, 'Connect Fail')
-);
+db.on('success', function () {
+    console.log('MongoDB Connection Successed');
+});
+
+db.on('fail', function () {
+    console.log('MongoDB Connection Failed');
+});
