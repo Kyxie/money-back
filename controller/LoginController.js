@@ -1,19 +1,28 @@
 /*
  * @Date: 2022-01-26 16:33:18
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-01-26 16:43:10
+ * @LastEditTime: 2022-02-05 23:33:22
  * @FilePath: \backend\controller\LoginController.js
  */
 
-const qs = require('qs')
 
+var User = require('../model/users')
 exports.Login = function (req, res) {
     console.log(req);
-    response = {
-        user: {
-            token: 123,
-            username: '123'
-        }
+    var postData = {
+        username: req.body.username,
+        password: req.body.password
     };
-    return res.send(response);
-}
+
+    User.findOne({
+        username: postData.username,
+        password: postData.password
+    }, function (err, data) {
+        if (err) throw err;
+        if (data) {
+            res.send({ "user": { "token": 244 }, "msg": 'Login successful', ...data });
+        } else {
+            res.send('Account or password wrong');
+        }
+    })
+};
