@@ -1,10 +1,10 @@
 /*
  * @Date: 2022-01-26 16:33:18
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-09 14:58:35
+ * @LastEditTime: 2022-02-21 15:24:57
  * @FilePath: \backend\controller\LoginController.js
  */
-
+const { generateToken } = require('../common/util.js')
 
 var User = require('../model/users')
 exports.Login = function (req, res) {
@@ -20,7 +20,10 @@ exports.Login = function (req, res) {
     }, function (err, data) {
         if (err) throw err;
         if (data) {
-            res.send({ "user": { "token": 244 }, "msg": 'Login successful', ...data });
+            const uid = data._id
+            const token = generateToken({ uid })
+            console.log("User -> Token ->", uid, "=>", token)
+            res.send({ "user": { "token": token }, "msg": 'Login successful', ...data });
         } else {
             res.send('Incorrect account name or password.');
         }

@@ -51,8 +51,14 @@ welcome to main
 
 [Nodejs Express 连接Mongodb - SegmentFault 思否](https://segmentfault.com/a/1190000008387379)
 
+创建数据库：
+
+```shell
+start mongod --dbpath E:\MongoDB\data  
+```
+
 我们用的数据库是mongoDB，直接用命令行操作数据库：[MongoDB 教程 | 菜鸟教程 (runoob.com)](https://www.runoob.com/mongodb/mongodb-tutorial.html)
 
-Robo三T：GUI显示数据库
+Robo3T：GUI显示数据库
 
 在Nodejs中操作数据库的函数库是mongoose：[Mongoose v6.2.1: API docs (mongoosejs.com)](https://mongoosejs.com/docs/api.html)

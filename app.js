@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:29:15
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-01-19 19:08:05
+ * @LastEditTime: 2022-02-21 15:30:24
  * @FilePath: \backend\app.js
  */
 var createError = require('http-errors');
@@ -9,6 +9,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
+const expressJWT = require('express-jwt')
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -20,11 +22,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(expressJWT({
+  secret: '123456',
+  algorithms: ['HS256'],
+}).unless({
+  path: ['/login', '/register']
+}))
 app.use('/', indexRouter);
 app.use('/Detail', indexRouter);
 

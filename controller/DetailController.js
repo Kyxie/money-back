@@ -1,9 +1,10 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-01-26 20:26:18
+ * @LastEditTime: 2022-02-21 16:22:01
  * @FilePath: \backend\controller\DetailController.js
  */
+
 const qs = require('qs')
 
 exports.getDetail = function (req, res) {
@@ -33,5 +34,6 @@ exports.getMonthlyBalance = function (req, res) {
 }
 
 exports.getDetailList = function (req, res) {
+    const params = qs.parse(req.query);
 
 }
