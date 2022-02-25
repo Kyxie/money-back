@@ -62,3 +62,5 @@ start mongod --dbpath E:\MongoDB\data
 Robo3T：GUI显示数据库
 
 在Nodejs中操作数据库的函数库是mongoose：[Mongoose v6.2.1: API docs (mongoosejs.com)](https://mongoosejs.com/docs/api.html)
+
+Express api：[Node.js Express 框架 | 菜鸟教程 (runoob.com)](https://www.runoob.com/nodejs/nodejs-express-framework.html)

@@ -1,18 +1,35 @@
 ### addRecord
 
-category: String
+后端给前端返回：
 
-amount: Number
-
-type: 0表示支出，1表示收入
-
-icon: String
-
-year: Number
-
-month: Number
-
-day: Number
-
-page: 分页，一页表示三天的内容，0表示今天+昨天+前天的内容，1表示再往前三天的内容
+```json
+"detail-list": [
+    {
+      "id": 1,
+      "month": 1,
+      "day": 13,
+      "year": 2022,
+      "amount": -98,
+      "list": [
+        {
+          "category": "Gift",
+          "icon": "gift-o",
+          "type": 0,
+          "amount": 193
+        },
+        {
+          "category": "Work",
+          "icon": "user-o",
+          "type": 1,
+          "amount": 24
+        },
+        {
+          "category": "Play",
+          "icon": "service-o",
+          "type": 0,
+          "amount": 13
+        }
+      ]
+    },
+```
 

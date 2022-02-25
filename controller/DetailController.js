@@ -1,39 +1,38 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-21 16:22:01
+ * @LastEditTime: 2022-02-25 11:46:25
  * @FilePath: \backend\controller\DetailController.js
  */
 
-const qs = require('qs')
+const qs = require("qs")
 
 exports.getDetail = function (req, res) {
-    console.log(req);
-    const params = qs.parse(req.query);
+    console.log(req)
+    const params = qs.parse(req.query)
     const response = {
         data: {
-            username: '123',
-            param: params
+            username: "123",
+            param: params,
         },
-        code: 200
+        code: 200,
     }
-    res.send(response);
+    res.send(response)
 }
 
 exports.getMonthlyBalance = function (req, res) {
-    const params = qs.parse(req.query);
+    const params = qs.parse(req.query)
     const { month, year } = params
     const response = {
-        "id": 1,
-        "year": month,
-        "month": year,
-        "income": 201,
-        "expense": 192.97
+        id: 1,
+        year: month,
+        month: year,
+        income: 201,
+        expense: 192.97,
     }
-    res.send(response);
+    res.send(response)
 }
 
 exports.getDetailList = function (req, res) {
-    const params = qs.parse(req.query);
-
+    const params = qs.parse(req.query)
 }
