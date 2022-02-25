@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:29:12
+ * @LastEditTime: 2022-02-24 20:39:12
  * @FilePath: \backend\controller\DetailController.js
  */
 
