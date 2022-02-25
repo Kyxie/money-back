@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-25 11:46:25
- * @FilePath: \backend\controller\DetailController.js
+ * @LastEditTime: 2022-02-25 15:47:29
+ * @FilePath: \Money_Back\controller\DetailController.js
  */
 
 const qs = require("qs")
