@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-01-18 16:29:15
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:29:48
- * @FilePath: \backend\app.js
+ * @LastEditTime: 2022-02-25 12:41:01
+ * @FilePath: \Money_Back\app.js
  */
 
 var createError = require("http-errors")
@@ -33,7 +33,7 @@ app.use(
         secret: "123456",
         algorithms: ["HS256"],
     }).unless({
-        path: ["/login", "/register"],
+        path: ["/", "/login", "/register"],
     })
 )
 app.use("/", indexRouter)

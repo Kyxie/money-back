@@ -54,7 +54,7 @@ welcome to main
 创建数据库：
 
 ```shell
-start mongod --dbpath E:\MongoDB\data  
+mongod --dbpath E:\MongoDB\data  
 ```
 
 我们用的数据库是mongoDB，直接用命令行操作数据库：[MongoDB 教程 | 菜鸟教程 (runoob.com)](https://www.runoob.com/mongodb/mongodb-tutorial.html)
