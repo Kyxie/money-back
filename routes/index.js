@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-01-18 16:29:15
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:25:44
- * @FilePath: \backend\routes\index.js
+ * @LastEditTime: 2022-02-25 12:53:39
+ * @FilePath: \Money_Back\routes\index.js
  */
 
 const express = require("express")
@@ -19,6 +19,6 @@ router.post("/login", LoginController.Login)
 router.get("/detail", DetailController.getDetail) // Keep
 router.get("/monthly-balance", DetailController.getMonthlyBalance)
 router.get("/detail-list", DetailController.getDetailList)
-router.post("/add-record", RecordController.addRecord)
+router.post("/record", RecordController.addRecord)
 
 module.exports = router
