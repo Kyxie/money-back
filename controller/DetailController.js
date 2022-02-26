@@ -8,6 +8,7 @@
 const qs = require("qs")
 const { db } = require("../model/record")
 const { getJWTPayload } = require("../common/util")
+const Record = require("../model/record")
 
 exports.getDetail = function (req, res) {
     console.log(req)
@@ -29,15 +30,31 @@ exports.getMonthlyBalance = async function (req, res) {
     let income_amount = 0
     let outcome_amount = 0
 
-    //db.collection.find({ month: month, year: year }, function (err, item) {})
-
-    const response = {
-        year: month,
-        month: year,
-        income: income_amount,
-        expense: outcome_amount,
-    }
-    res.send(response)
+    Record.find(
+        {
+            uid: obj.uid,
+            month: month,
+            year: year,
+        },
+        function (err, data) {
+            for (let item of data) {
+                if (item.type === 1) {
+                    income_amount = income_amount + item.amount
+                }
+                if (item.type === 0) {
+                    outcome_amount = outcome_amount + item.amount
+                }
+            }
+            console.log("outcome", outcome_amount, " income", income_amount)
+            const response = {
+                year: year,
+                month: month,
+                income: income_amount,
+                expense: outcome_amount,
+            }
+            res.send(response)
+        }
+    )
 }
 
 exports.getDetailList = function (req, res) {
