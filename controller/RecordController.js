@@ -20,3 +20,9 @@ exports.addRecord = async function (req, res) {
     // Response
     res.send({ code: 200, data: result })
 }
+
+exports.deleteRecord = async function (req, res) {}
+
+exports.findRecord = async function (req, res) {}
+
+exports.changeRecord = async function (req, res) {}
