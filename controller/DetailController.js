@@ -1,12 +1,13 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-25 16:51:38
+ * @LastEditTime: 2022-02-26 13:06:37
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
 const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
+const Record = require("../model/record")
 
 exports.getDetail = function (req, res) {
     console.log(req)
@@ -35,5 +36,17 @@ exports.getMonthlyBalance = function (req, res) {
 
 exports.getDetailList = async function (req, res) {
     const obj = await getJWTPayload(req.get("Authorization"))
+    const date = new Date()
+    // const today = data.getDay() + 1
+    // const tomonth = date.getDate()
     const response = {}
+    Record.find(
+        {
+            uid: obj.uid,
+        },
+        function (err, docs) {
+            if (err) throw err
+            res.send(docs)
+        }
+    )
 }
