@@ -21,4 +21,8 @@ router.get("/monthly-balance", DetailController.getMonthlyBalance)
 router.get("/detail-list", DetailController.getDetailList)
 router.post("/record", RecordController.addRecord)
 
+router.delete("/record", RecordController.deleteRecord)
+router.get("/record", RecordController.findRecord)
+router.patch("/record", RecordController.changeRecord)
+
 module.exports = router

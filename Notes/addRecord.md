@@ -8,7 +8,8 @@
     "category": "Work",
     "amount": 1200,
     "type": 1,
-    "icon":"work-o" 
+    "icon": "work-o",
+    "type": 1, // outcome: 0, income: 1
+    "icon": "work-o"
 }
 ```
-
