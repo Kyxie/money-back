@@ -1,13 +1,17 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-25 15:47:29
+ * @LastEditTime: 2022-02-26 13:06:37
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
+const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
+<<<<<<< HEAD
 const { db } = require("../model/record")
 const { getJWTPayload } = require("../common/util")
+=======
+>>>>>>> 3be8aca06b00fc5d3e3954c28b992c037b1ac0ac
 const Record = require("../model/record")
 
 exports.getDetail = function (req, res) {
@@ -27,6 +31,7 @@ exports.getMonthlyBalance = async function (req, res) {
     const params = qs.parse(req.query)
     const obj = await getJWTPayload(req.get("Authorization"))
     const { month, year } = params
+<<<<<<< HEAD
     let income_amount = 0
     let outcome_amount = 0
 
@@ -55,8 +60,30 @@ exports.getMonthlyBalance = async function (req, res) {
             res.send(response)
         }
     )
+=======
+    const response = {
+        year: month,
+        month: year,
+        income: 201,
+        expense: 192.97,
+    }
+    res.send(response)
+>>>>>>> 3be8aca06b00fc5d3e3954c28b992c037b1ac0ac
 }
 
-exports.getDetailList = function (req, res) {
-    const params = qs.parse(req.query)
+exports.getDetailList = async function (req, res) {
+    const obj = await getJWTPayload(req.get("Authorization"))
+    const date = new Date()
+    // const today = data.getDay() + 1
+    // const tomonth = date.getDate()
+    const response = {}
+    Record.find(
+        {
+            uid: obj.uid,
+        },
+        function (err, docs) {
+            if (err) throw err
+            res.send(docs)
+        }
+    )
 }
