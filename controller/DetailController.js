@@ -1,14 +1,12 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-26 13:06:37
+ * @LastEditTime: 2022-02-26 15:14:15
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
 const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
-const { db } = require("../model/record")
-const { getJWTPayload } = require("../common/util")
 const Record = require("../model/record")
 
 exports.getDetail = function (req, res) {
@@ -38,6 +36,7 @@ exports.getMonthlyBalance = async function (req, res) {
             year: year,
         },
         function (err, data) {
+            if (err) throw err
             for (let item of data) {
                 if (item.type === 1) {
                     income_amount = income_amount + item.amount
