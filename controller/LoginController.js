@@ -1,12 +1,13 @@
 /*
  * @Date: 2022-01-26 16:33:18
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:29:16
- * @FilePath: \backend\controller\LoginController.js
+ * @LastEditTime: 2022-02-25 16:30:10
+ * @FilePath: \Money_Back\controller\LoginController.js
  */
-const { generateToken } = require("../common/util.js")
 
+const { generateToken } = require("../common/util.js")
 var User = require("../model/users")
+
 exports.Login = function (req, res) {
     console.log(req)
     var postData = {

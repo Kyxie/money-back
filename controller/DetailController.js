@@ -1,10 +1,11 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-25 15:47:29
+ * @LastEditTime: 2022-02-25 16:51:38
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
+const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
 
 exports.getDetail = function (req, res) {
@@ -24,7 +25,6 @@ exports.getMonthlyBalance = function (req, res) {
     const params = qs.parse(req.query)
     const { month, year } = params
     const response = {
-        id: 1,
         year: month,
         month: year,
         income: 201,
@@ -33,6 +33,7 @@ exports.getMonthlyBalance = function (req, res) {
     res.send(response)
 }
 
-exports.getDetailList = function (req, res) {
-    const params = qs.parse(req.query)
+exports.getDetailList = async function (req, res) {
+    const obj = await getJWTPayload(req.get("Authorization"))
+    const response = {}
 }
