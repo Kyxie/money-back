@@ -6,6 +6,8 @@
  */
 
 const qs = require("qs")
+const { db } = require("../model/record")
+const { getJWTPayload } = require("../common/util")
 
 exports.getDetail = function (req, res) {
     console.log(req)
@@ -20,15 +22,20 @@ exports.getDetail = function (req, res) {
     res.send(response)
 }
 
-exports.getMonthlyBalance = function (req, res) {
+exports.getMonthlyBalance = async function (req, res) {
     const params = qs.parse(req.query)
+    const obj = await getJWTPayload(req.get("Authorization"))
     const { month, year } = params
+    let income_amount = 0
+    let outcome_amount = 0
+
+    //db.collection.find({ month: month, year: year }, function (err, item) {})
+
     const response = {
-        id: 1,
         year: month,
         month: year,
-        income: 201,
-        expense: 192.97,
+        income: income_amount,
+        expense: outcome_amount,
     }
     res.send(response)
 }
