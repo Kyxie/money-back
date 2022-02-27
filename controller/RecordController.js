@@ -21,8 +21,23 @@ exports.addRecord = async function (req, res) {
     res.send({ code: 200, data: result })
 }
 
-exports.deleteRecord = async function (req, res) {}
-
-exports.findRecord = async function (req, res) {}
+exports.deleteRecord = async function (req, res) {
+    const body = req.body
+    const { _id } = body
+    const obj = await getJWTPayload(req.get("Authorization"))
+    Record.deleteOne(
+        {
+            uid: obj.uid,
+            _id: _id,
+        },
+        function (error) {
+            if (error) {
+                res.send({ data: "delete failed" })
+            } else {
+                res.send({ code: 200 })
+            }
+        }
+    )
+}
 
 exports.changeRecord = async function (req, res) {}
