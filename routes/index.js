@@ -21,8 +21,7 @@ router.get("/monthly-balance", DetailController.getMonthlyBalance)
 router.get("/detail-list", DetailController.getDetailList)
 router.post("/record", RecordController.addRecord)
 
-router.delete("/record", RecordController.deleteRecord)
-router.get("/record", RecordController.findRecord)
-router.patch("/record", RecordController.changeRecord)
+router.delete("/record", RecordController.deleteRecord) //user id, list id
+router.patch("/record", RecordController.changeRecord) //user id, list id, catagory, catagory new amount
 
 module.exports = router
