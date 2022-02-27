@@ -1,13 +1,14 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-26 15:14:15
+ * @LastEditTime: 2022-02-27 00:05:10
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
 const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
 const Record = require("../model/record")
+const detailListUtils = require("../common/detailListUtils")
 
 exports.getDetail = function (req, res) {
     console.log(req)
@@ -59,17 +60,71 @@ exports.getMonthlyBalance = async function (req, res) {
 
 exports.getDetailList = async function (req, res) {
     const obj = await getJWTPayload(req.get("Authorization"))
-    const date = new Date()
+    // const date = new Date()
     // const today = data.getDay() + 1
     // const tomonth = date.getDate()
-    const response = {}
+    var response = []
     Record.find(
         {
             uid: obj.uid,
         },
         function (err, docs) {
             if (err) throw err
-            res.send(docs)
+
+            // All date Keys
+            var dateKeys = new Set()
+            for (var i = 0; i < docs.length; i++) {
+                dateKeys.add(
+                    detailListUtils.dateToString(
+                        docs[i].year,
+                        docs[i].month,
+                        docs[i].day
+                    )
+                )
+            }
+            dateKeys = Array.from(dateKeys).sort().reverse()
+
+            for (var i = 0; i < dateKeys.length; i++) {
+                var dateSet = detailListUtils.dateToNumber(dateKeys[i])
+                var compResponse = {}
+                var list = []
+
+                for (var j = 0; j < docs.length; j++) {
+                    var compList = {}
+                    if (
+                        docs[j].year == dateSet.year &&
+                        docs[j].month == dateSet.month &&
+                        docs[j].day == dateSet.day
+                    ) {
+                        compResponse.id = i + 1
+                        compResponse.year = docs[j].year
+                        compResponse.month = docs[j].month
+                        compResponse.day = docs[j].day
+                        compList.category = docs[j].category
+                        compList.icon = docs[j].icon
+                        compList.type = docs[j].type
+                        compList.amount = docs[j].amount
+                        list.push(compList)
+                    }
+                    compResponse.list = list
+                }
+                response.push(compResponse)
+            }
+
+            for (var i = 0; i < response.length; i++) {
+                response[i].amount = 0
+                for (var j = 0; j < response[i].list.length; j++) {
+                    if (response[i].list[j].type == 0) {
+                        response[i].amount =
+                            response[i].amount - response[i].list[j].amount
+                    } else {
+                        response[i].amount =
+                            response[i].amount + response[i].list[j].amount
+                    }
+                }
+            }
+
+            res.send(response)
         }
     )
 }
