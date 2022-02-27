@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:29:15
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-25 12:53:39
+ * @LastEditTime: 2022-02-27 12:21:19
  * @FilePath: \Money_Back\routes\index.js
  */
 
@@ -20,9 +20,7 @@ router.get("/detail", DetailController.getDetail) // Keep
 router.get("/monthly-balance", DetailController.getMonthlyBalance)
 router.get("/detail-list", DetailController.getDetailList)
 router.post("/record", RecordController.addRecord)
-
 router.delete("/record", RecordController.deleteRecord)
-router.get("/record", RecordController.findRecord)
 router.patch("/record", RecordController.changeRecord)
 
 module.exports = router

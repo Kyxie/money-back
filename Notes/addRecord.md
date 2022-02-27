@@ -1,5 +1,7 @@
 ### addRecord
 
+前端给后端发送
+
 ```json
 {
     "year": 2022,
