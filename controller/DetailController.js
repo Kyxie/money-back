@@ -1,7 +1,12 @@
 /*
  * @Date: 2022-01-18 16:30:41
+<<<<<<< HEAD
  * @LastEditors: Shaowei Sun
  * @LastEditTime: 2022-02-27 14:38:36
+=======
+ * @LastEditors: Kunyang Xie
+ * @LastEditTime: 2022-02-27 12:31:54
+>>>>>>> 26265a477bbf5c2c7ca40b10e1739e8ef012f307
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
