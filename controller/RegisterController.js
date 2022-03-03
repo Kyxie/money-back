@@ -1,12 +1,12 @@
 /*
  * @Date: 2022-01-26 23:22:55
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:29:28
- * @FilePath: \backend\controller\RegisterController.js
+ * @LastEditTime: 2022-03-03 16:32:56
+ * @FilePath: \Money_Back\controller\RegisterController.js
  */
 
 exports.postRegister = function (req, res) {
-    var postData = {
+    let postData = {
         username: req.body.username,
         password: req.body.password,
         age: req.body.age,
