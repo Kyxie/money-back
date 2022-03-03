@@ -12,8 +12,7 @@ exports.getValidChoices = async function (req, res) {}
 
 exports.getLineChart = async function (req, res) {
     const obj = await getJWTPayload(req.get("Authorization"))
-    response = {}
-    response.week = chartUtils.dateToWeek(1, 15)
+    var response = chartUtils.weekToDate(3)
     res.send(response)
 }
 
