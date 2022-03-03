@@ -1,15 +1,15 @@
 /*
  * @Date: 2022-02-26 21:23:38
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-26 23:52:40
+ * @LastEditTime: 2022-03-03 16:30:55
  * @FilePath: \Money_Back\common\detailListUtils.js
  */
 
 exports.dateToString = function (year, month, day) {
     // Change the date from number to string and add 0
-    var yearString
-    var monthString
-    var dayString
+    let yearString
+    let monthString
+    let dayString
 
     yearString = year.toString()
 
@@ -29,7 +29,7 @@ exports.dateToString = function (year, month, day) {
 }
 
 exports.dateToNumber = function (dateString) {
-    var dateSet = {}
+    let dateSet = {}
 
     dateSet.year = Number(dateString.slice(0, 4))
     dateSet.month = Number(dateString.slice(4, 6))
