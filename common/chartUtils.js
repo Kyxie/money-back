@@ -18,16 +18,19 @@ exports.dateToWeek = function (month, day) {
 }
 
 exports.weekToDate = function (week) {
-    const dat = require('date-and-time')
+    const dat = require("date-and-time")
     var myDate = new Date()
     const year = myDate.getFullYear()
     const newYear = new Date(year, 0, 1)
-    if(week==1){
-        return {month:newYear.getMonth() + 1, date:newYear.getDate()}
+    if (week == 1) {
+        const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
+        return {
+            month: firstOfWeek.getMonth() + 1,
+            date: firstOfWeek.getDate(),
+        }
     }
     const firstWeekLen = 7 - newYear.getDay()
     const secondWeek = dat.addDays(newYear, firstWeekLen)
-    requiredTime = dat.addDays(secondWeek, 7*(week-1))
-    return {month:requiredTime.getMonth()+1, date:requiredTime.getDate()}
+    requiredTime = dat.addDays(secondWeek, 7 * (week - 2))
+    return { month: requiredTime.getMonth() + 1, date: requiredTime.getDate() }
 }
-
