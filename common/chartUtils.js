@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-04 12:32:53
+ * @LastEditTime: 2022-03-04 12:44:25
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -89,4 +89,12 @@ exports.resCategoryRecord = function (data) {
     }
 
     return temp
+}
+
+ascendingSort = function (property) {
+    return function (obj1, obj2) {
+        let value1 = obj1[property]
+        let value2 = obj2[property]
+        return value1 - value2
+    }
 }
