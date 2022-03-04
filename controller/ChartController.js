@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 11:36:01
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-04 11:37:29
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -63,6 +63,64 @@ exports.getLineChart = async function (req, res) {
 }
 
 exports.getRankList = async function (req, res) {
-    date = chartUtils.weekToDate(1)
-    console.log(date)
+    const params = qs.parse(req.query)
+    const obj = await getJWTPayload(req.get("Authorization"))
+    let response = {}
+    for (let key in params) {
+        if (key === "week") {
+            response.list = []
+            const { week } = params
+            const curYear = new Date().getFullYear()
+            Record.find(
+                {
+                    uid: obj.uid,
+                    year: curYear,
+                    week: week,
+                },
+                function (err, data) {
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCategoryRecord(data)
+                        res.send(response)
+                    }
+                }
+            )
+        }
+        if (key === "month") {
+            response.list = []
+            const { month } = params
+            const curYear = new Date().getFullYear()
+            Record.find(
+                {
+                    uid: obj.uid,
+                    year: curYear,
+                    month: month,
+                },
+                function (err, data) {
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCategoryRecord(data)
+                        res.send(response)
+                    }
+                }
+            )
+        }
+        if (key === "year") {
+            response.list = []
+            const { year } = params
+            Record.find(
+                {
+                    uid: obj.uid,
+                    year: year,
+                },
+                function (err, data) {
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCategoryRecord(data)
+                        res.send(response)
+                    }
+                }
+            )
+        }
+    }
 }
