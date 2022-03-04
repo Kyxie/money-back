@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
- * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-04 11:37:29
+ * @LastEditors: Kunyang Xie
+ * @LastEditTime: 2022-03-04 16:31:57
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -75,20 +75,20 @@ exports.getLineChart = async function (req, res) {
 
     for (let key in params) {
         if (key === "week") {
-            let date = chartUtils.weekToDate(params.week)
-            let daysPerWeek = chartUtils.weekDaysNum(params.week, date)
-            if (daysPerWeek < 7 && params.week === "1") {
-                date.month = 1
-                date.day = 1
-            }
+            // let date = chartUtils.weekToDate(params.week)
+            // let daysPerWeek = chartUtils.weekDaysNum(params.week, date)
+            // if (daysPerWeek < 7 && params.week === "1") {
+            //     date.month = 1
+            //     date.day = 1
+            // }
 
-            let dayArray = []
-            for (let i = 0; i < daysPerWeek; i++) {
-                monthNum = date.month
-                dayNum = date.day + i
-                dayArray[i] = monthNum.toString() + "-" + dayNum.toString()
-            }
-            response["x-axis"] = dayArray
+            // let dayArray = []
+            // for (let i = 0; i < daysPerWeek; i++) {
+            //     monthNum = date.month
+            //     dayNum = date.day + i
+            //     dayArray[i] = monthNum.toString() + "-" + dayNum.toString()
+            // }
+            // response["x-axis"] = dayArray
 
             Record.find(
                 {
@@ -99,7 +99,14 @@ exports.getLineChart = async function (req, res) {
                 },
                 function (err, data) {
                     if (err) throw err
-                    res.send(data)
+
+                    let values = chartUtils.lineChartFormat(data)
+                    let sumAndAve = chartUtils.sumAndAveArray(values)
+
+                    response.values = values
+                    response.total = sumAndAve.sum
+                    response.average = sumAndAve.ave
+                    res.send(response)
                 }
             )
         } else if (key === "month") {
@@ -110,7 +117,16 @@ exports.getLineChart = async function (req, res) {
                 monthArray[i] = (i + 1).toString()
             }
             response["x-axis"] = monthArray
-            res.send(response)
+
+            Record.find(
+                {
+                    uid: obj.uid,
+                    type: 0,
+                    year: today.getFullYear(),
+                    week: params.week,
+                },
+                function (err, data) {}
+            )
         } else {
             console.log("Wrong key")
         }
