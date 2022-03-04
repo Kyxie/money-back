@@ -12,59 +12,59 @@ const Record = require("../model/record")
 const { response } = require("express")
 
 exports.getValidChoices = async function (req, res) {
-
     //let myDate = new Date();
     //yearThis = myDate.getFullYear();
     function getNowSceond() {
-        return Math.floor(Date.now() / 1000);
+        return Math.floor(Date.now() / 1000)
     }
 
     function getTimeInfo(nTimeStamps) {
-        var date = new Date(nTimeStamps * 1000);
+        var date = new Date(nTimeStamps * 1000)
 
         var retData = {
             nYear: date.getFullYear(),
             nMonth: date.getMonth() + 1,
-        };
-        return retData;
+        }
+        return retData
     }
 
-    let curTimeStamps = getNowSceond();
-    let timeInfo = getTimeInfo(curTimeStamps);
-    let thisYear = timeInfo.nYear;
-    let firstDay = new Date(thisYear, 0, 1);
-    let thisDay = new Date;
+    let curTimeStamps = getNowSceond()
+    let timeInfo = getTimeInfo(curTimeStamps)
+    let thisYear = timeInfo.nYear
+    let firstDay = new Date(thisYear, 0, 1)
+    let thisDay = new Date()
 
     length_of_firstWeek = 7 - firstDay.getDay()
     length_of_untilToday = (thisDay - firstDay) / (1000 * 3600 * 24)
-    whichWeekToday = Math.floor((length_of_untilToday - length_of_firstWeek) / 7 + 1 + 1);
+    whichWeekToday = Math.floor(
+        (length_of_untilToday - length_of_firstWeek) / 7 + 1 + 1
+    )
 
-    shuchuYear = timeInfo.nYear;
-    shuchuMonth = timeInfo.nMonth;
-    shuchuWeek = whichWeekToday;
+    shuchuYear = timeInfo.nYear
+    shuchuMonth = timeInfo.nMonth
+    shuchuWeek = whichWeekToday
 
-    let validChoices = {};
-    let year = new Array();
-    let month = new Array();
-    let weeks = new Array();
+    let validChoices = {}
+    let year = new Array()
+    let month = new Array()
+    let weeks = new Array()
 
     for (let zhou = 1; zhou < shuchuWeek + 1; zhou++) {
-        weeks.push(zhou);
+        weeks.push(zhou)
     }
-    validChoices.weeks = weeks;
+    validChoices.weeks = weeks
 
     for (let yue = 1; yue < shuchuMonth + 1; yue++) {
-        month.push(yue);
+        month.push(yue)
     }
-    validChoices.month = month;
+    validChoices.month = month
 
     for (let nian = 2017; nian < shuchuYear + 1; nian++) {
-        year.push(nian);
+        year.push(nian)
     }
-    validChoices.year = year;
-    let response = validChoices;
-    res.send(response);
-
+    validChoices.year = year
+    let response = validChoices
+    res.send(response)
 }
 
 exports.getLineChart = async function (req, res) {
