@@ -1,10 +1,11 @@
 /*
  * @Date: 2022-02-21 13:26:33
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 10:51:26
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-04 12:00:32
  * @FilePath: \Money_Back\controller\RecordController.js
  */
 
+const { rethrow } = require("jade/lib/runtime")
 const { getJWTPayload } = require("../common/util")
 const Record = require("../model/record")
 const chartUtils = require("../common/chartUtils")
@@ -32,10 +33,9 @@ exports.deleteRecord = async function (req, res) {
             uid: obj.uid,
             _id: _id,
         },
-        function (error) {
-            if (error) {
-                res.send({ data: "delete failed" })
-            } else {
+        function (err) {
+            if (err) throw err
+            else {
                 res.send({ code: 200 })
             }
         }
