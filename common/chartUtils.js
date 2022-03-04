@@ -23,38 +23,27 @@ exports.weekToDate = function (week) {
     const dat = require("date-and-time")
     var myDate = new Date()
     const year = myDate.getFullYear()
+    // if week = 1
     const newYear = new Date(year, 0, 1)
-    if (week == 1) {
-        const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
-        const endOfWeek = dat.addDays(firstOfWeek, 6)
-        return {
-            start: detailListUtils.dateToString(
-                firstOfWeek.getFullYear(),
-                firstOfWeek.getMonth() + 1,
-                firstOfWeek.getDate()
-            ),
-            end: detailListUtils.dateToString(
-                endOfWeek.getFullYear(),
-                endOfWeek.getMonth() + 1,
-                endOfWeek.getDate()
-            ),
-        }
-    }
+    const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
+    // if week > 1
     const firstWeekLen = 7 - newYear.getDay()
     const secondWeek = dat.addDays(newYear, firstWeekLen)
-    requiredStart = dat.addDays(secondWeek, 7 * (week - 2))
-    requiredEnd = dat.addDays(requiredStart, 6)
+    const requiredStart = dat.addDays(secondWeek, 7 * (week - 2))
+    var start = week == 1 ? firstOfWeek : requiredStart
+    var strArr = new list(7)
+    for (var i = 0; i < 7; i++) {
+        current = dat.addDays(start, i)
+        strArr[i] = detailListUtils.dateToString(
+            current.getFullYear(),
+            current.getMonth() + 1,
+            current.getDate()
+        )
+    }
     return {
-        start: detailListUtils.dateToString(
-            requiredStart.getFullYear(),
-            requiredStart.getMonth() + 1,
-            requiredStart.getDate()
-        ),
-        end: detailListUtils.dateToString(
-            requiredEnd.getFullYear(),
-            requiredEnd.getMonth() + 1,
-            requiredEnd.getDate()
-        ),
+        start: strArr[0],
+        end: strArr[6],
+        list: strArr,
     }
 }
 
