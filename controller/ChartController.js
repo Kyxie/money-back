@@ -1,15 +1,15 @@
 /*
  * @Date: 2022-02-28 23:17:42
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 16:48:36
+ * @LastEditTime: 2022-03-04 17:38:58
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
 const chartUtils = require("../common/chartUtils")
+const detailListUtils = require("../common/detailListUtils")
 const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
 const Record = require("../model/record")
-const { response } = require("express")
 
 exports.getValidChoices = async function (req, res) {
     //let myDate = new Date();
@@ -75,20 +75,24 @@ exports.getLineChart = async function (req, res) {
 
     for (let key in params) {
         if (key === "week") {
-            // let date = chartUtils.weekToDate(params.week)
-            // let daysPerWeek = chartUtils.weekDaysNum(params.week, date)
-            // if (daysPerWeek < 7 && params.week === "1") {
-            //     date.month = 1
-            //     date.day = 1
-            // }
+            let date = chartUtils.weekToDate(params.week)
 
-            // let dayArray = []
+            let daysPerWeek = chartUtils.weekDaysNum(params.week, date)
+            if (daysPerWeek < 7 && params.week === "1") {
+                date.start = detailListUtils.dateToString(
+                    detailListUtils.dateToNumber(date.start).year,
+                    1,
+                    1
+                )
+            }
+
+            let dayArray = chartUtils.xAxis(date, daysPerWeek)
             // for (let i = 0; i < daysPerWeek; i++) {
             //     monthNum = date.month
             //     dayNum = date.day + i
             //     dayArray[i] = monthNum.toString() + "-" + dayNum.toString()
             // }
-            // response["x-axis"] = dayArray
+            response["x-axis"] = dayArray
 
             Record.find(
                 {

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 16:48:34
+ * @LastEditTime: 2022-03-04 17:38:55
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -19,7 +19,6 @@ exports.dateToWeek = function (month, day) {
     return week
 }
 
-// Proudly written by Xiang Fang
 exports.weekToDate = function (week) {
     const dat = require("date-and-time")
     var myDate = new Date()
@@ -60,18 +59,16 @@ exports.weekToDate = function (week) {
 }
 
 exports.weekDaysNum = function (week, date) {
-    let daysPerWeek
+    let startMonth = detailListUtils.dateToNumber(date.start).month
+    let startDay = detailListUtils.dateToNumber(date.start).day
+    let daysPerWeek = 7
     if (week === "1") {
-        if (date.month === 12) {
-            daysPerWeek = date.day - 25
-        } else {
-            daysPerWeek = 7
+        if (startMonth === 12) {
+            daysPerWeek = startDay - 25
         }
     } else {
-        if (date.month === 12 && date.day > 25) {
-            daysPerWeek = 32 - date.day
-        } else {
-            daysPerWeek = 7
+        if (startMonth === 12 && startDay > 25) {
+            daysPerWeek = 32 - startDay
         }
     }
     return daysPerWeek
@@ -143,7 +140,6 @@ exports.lineChartFormat = function (data) {
     let dayList = new Map()
     let dateKeys = new Set()
     let dateValues = new Array()
-    let xAxis = new Array()
 
     for (let i = 0; i < data.length; i++) {
         dateKeys.add(
@@ -175,4 +171,13 @@ exports.lineChartFormat = function (data) {
     }
 
     return dateValues
+}
+
+exports.xAxis = function (date, daysPerWeek) {
+    let dayArray = new Array(daysPerWeek)
+    for (let i = 0; i < daysPerWeek; i++) {
+        dayArray[i] = date.list[6 - i]
+    }
+    dayArray.sort()
+    return dayArray
 }
