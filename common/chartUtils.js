@@ -1,9 +1,11 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 12:48:43
+ * @LastEditTime: 2022-03-04 16:19:45
  * @FilePath: \Money_Back\common\chartUtils.js
  */
+
+const detailListUtils = require("./detailListUtils")
 
 exports.dateToWeek = function (month, day) {
     month = month - 1
@@ -17,23 +19,24 @@ exports.dateToWeek = function (month, day) {
     return week
 }
 
-exports.weekToDate = function (week) {
-    const dat = require("date-and-time")
-    var myDate = new Date()
-    const year = myDate.getFullYear()
-    const newYear = new Date(year, 0, 1)
-    if (week == 1) {
-        const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
-        return {
-            month: firstOfWeek.getMonth() + 1,
-            day: firstOfWeek.getDate(),
-        }
-    }
-    const firstWeekLen = 7 - newYear.getDay()
-    const secondWeek = dat.addDays(newYear, firstWeekLen)
-    requiredTime = dat.addDays(secondWeek, 7 * (week - 2))
-    return { month: requiredTime.getMonth() + 1, day: requiredTime.getDate() }
-}
+// // Proudly written by Xiang Fang
+// exports.weekToDate = function (week) {
+//     const dat = require("date-and-time")
+//     var myDate = new Date()
+//     const year = myDate.getFullYear()
+//     const newYear = new Date(year, 0, 1)
+//     if (week == 1) {
+//         const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
+//         return {
+//             month: firstOfWeek.getMonth() + 1,
+//             day: firstOfWeek.getDate(),
+//         }
+//     }
+//     const firstWeekLen = 7 - newYear.getDay()
+//     const secondWeek = dat.addDays(newYear, firstWeekLen)
+//     requiredTime = dat.addDays(secondWeek, 7 * (week - 2))
+//     return { month: requiredTime.getMonth() + 1, day: requiredTime.getDate() }
+// }
 
 exports.weekDaysNum = function (week, date) {
     let daysPerWeek
@@ -88,6 +91,8 @@ exports.resCategoryRecord = function (data) {
         tempItem.percentage = Math.round((tempItem.amount / sum) * 100)
     }
 
+    temp = temp.sort(ascendingSort("percentage")).reverse()
+
     return temp
 }
 
@@ -97,4 +102,61 @@ function ascendingSort(property) {
         let value2 = obj2[property]
         return value1 - value2
     }
+}
+
+exports.sumAndAveArray = function (array) {
+    let sumAndAve = new Map()
+
+    let sum = 0
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i]
+    }
+    let ave = sum / array.length
+
+    sumAndAve.sum = sum
+    sumAndAve.ave = ave
+    return sumAndAve
+}
+
+exports.lineChartFormat = function (data) {
+    let dayList = new Map()
+    let dateKeys = new Set()
+    let dateValues = new Array()
+    let xAxis = new Array()
+
+    for (let i = 0; i < data.length; i++) {
+        dateKeys.add(
+            detailListUtils.dateToString(
+                data[i].year,
+                data[i].month,
+                data[i].day
+            )
+        )
+    }
+    dateKeys = Array.from(dateKeys).sort()
+
+    for (let i = 0; i < dateKeys.length; i++) {
+        let date = detailListUtils.dateToNumber(dateKeys[i])
+        xAxis.push(date.month.toString() + "-" + date.day.toString())
+    }
+
+    for (let i = 0; i < dateKeys.length; i++) {
+        dayList[dateKeys[i]] = 0
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        dayList[
+            detailListUtils.dateToString(
+                data[i].year,
+                data[i].month,
+                data[i].day
+            )
+        ] += data[i].amount
+    }
+
+    for (let key in dayList) {
+        dateValues.push(dayList[key])
+    }
+
+    return [xAxis, dateValues]
 }
