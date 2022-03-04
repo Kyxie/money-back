@@ -80,7 +80,7 @@ exports.getRankList = async function (req, res) {
                 function (err, data) {
                     if (err) throw err
                     else {
-                        response.list = chartUtils.resCatagoryRecord(data)
+                        response.list = chartUtils.resCategoryRecord(data)
                         res.send(response)
                     }
                 }
@@ -99,7 +99,7 @@ exports.getRankList = async function (req, res) {
                 function (err, data) {
                     if (err) throw err
                     else {
-                        response.list = chartUtils.resCatagoryRecord(data)
+                        response.list = chartUtils.resCategoryRecord(data)
                         res.send(response)
                     }
                 }
@@ -116,7 +116,7 @@ exports.getRankList = async function (req, res) {
                 function (err, data) {
                     if (err) throw err
                     else {
-                        response.list = chartUtils.resCatagoryRecord(data)
+                        response.list = chartUtils.resCategoryRecord(data)
                         res.send(response)
                     }
                 }

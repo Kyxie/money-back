@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-04 11:56:46
+ * @LastEditTime: 2022-03-04 12:32:53
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -53,20 +53,20 @@ exports.weekDaysNum = function (week, date) {
     return daysPerWeek
 }
 
-exports.resCatagoryRecord = function (data) {
+exports.resCategoryRecord = function (data) {
     let temp = []
     let sum = 0
     for (let dataItem of data) {
         let sign = 0
         for (let tempItem of temp) {
-            if (tempItem.catagory === dataItem.catagory) {
+            if (tempItem.category === dataItem.category) {
                 sign = 1
                 break
             }
         }
         if (sign === 1) {
             for (let tempItem of temp) {
-                if (tempItem.catagory === dataItem.catagory) {
+                if (tempItem.category === dataItem.category) {
                     tempItem.amount = tempItem.amount + dataItem.amount
                     sum = sum + dataItem.amount
                     break
@@ -74,7 +74,7 @@ exports.resCatagoryRecord = function (data) {
             }
         } else {
             let component = {}
-            component.catagory = dataItem.catagory
+            component.category = dataItem.category
             component.icon = dataItem.icon
             component.type = 0
             component.amount = dataItem.amount
@@ -85,8 +85,7 @@ exports.resCatagoryRecord = function (data) {
         }
     }
     for (let tempItem of temp) {
-        tempItem.percentage = tempItem.amount / sum
-        console.log(tempItem.percentage)
+        tempItem.percentage = Math.round((tempItem.amount / sum) * 100)
     }
 
     return temp
