@@ -19,24 +19,45 @@ exports.dateToWeek = function (month, day) {
     return week
 }
 
-// // Proudly written by Xiang Fang
-// exports.weekToDate = function (week) {
-//     const dat = require("date-and-time")
-//     var myDate = new Date()
-//     const year = myDate.getFullYear()
-//     const newYear = new Date(year, 0, 1)
-//     if (week == 1) {
-//         const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
-//         return {
-//             month: firstOfWeek.getMonth() + 1,
-//             day: firstOfWeek.getDate(),
-//         }
-//     }
-//     const firstWeekLen = 7 - newYear.getDay()
-//     const secondWeek = dat.addDays(newYear, firstWeekLen)
-//     requiredTime = dat.addDays(secondWeek, 7 * (week - 2))
-//     return { month: requiredTime.getMonth() + 1, day: requiredTime.getDate() }
-// }
+// Proudly written by Xiang Fang
+exports.weekToDate = function (week) {
+    const dat = require("date-and-time")
+    var myDate = new Date()
+    const year = myDate.getFullYear()
+    const newYear = new Date(year, 0, 1)
+    if (week == 1) {
+        const firstOfWeek = dat.addDays(newYear, -newYear.getDay())
+        const endOfWeek = dat.addDays(firstOfWeek, 6)
+        return {
+            start: detailListUtils.dateToString(
+                firstOfWeek.getFullYear(),
+                firstOfWeek.getMonth() + 1,
+                firstOfWeek.getDate()
+            ),
+            end: detailListUtils.dateToString(
+                endOfWeek.getFullYear(),
+                endOfWeek.getMonth() + 1,
+                endOfWeek.getDate()
+            ),
+        }
+    }
+    const firstWeekLen = 7 - newYear.getDay()
+    const secondWeek = dat.addDays(newYear, firstWeekLen)
+    requiredStart = dat.addDays(secondWeek, 7 * (week - 2))
+    requiredEnd = dat.addDays(requiredStart, 6)
+    return {
+        start: detailListUtils.dateToString(
+            requiredStart.getFullYear(),
+            requiredStart.getMonth() + 1,
+            requiredStart.getDate()
+        ),
+        end: detailListUtils.dateToString(
+            requiredEnd.getFullYear(),
+            requiredEnd.getMonth() + 1,
+            requiredEnd.getDate()
+        ),
+    }
+}
 
 exports.weekDaysNum = function (week, date) {
     let daysPerWeek
