@@ -1,4 +1,4 @@
-当前数据格式
+# 当前数据格式
 
 ```json
 [
@@ -73,8 +73,8 @@
 后端应该给前端返回
 
 ```json
-[	// response
-        {	// compResponse
+[
+        {
             "id": 1, // 第几天
             "month": 1,
             "day": 13,
@@ -82,21 +82,18 @@
             "amount": -98, // 当天的收支总额
             "list": [
                 {
-                    "id": 1,	// record的id
                     "category": "Gift",
                     "icon": "gift-o", // 图标
                     "type": 0, // 0 表示支出，1表示收入
                     "amount": 193 // 单个商品的消费
                 },
                 {
-                    "id": 2,
                     "category": "Work",
                     "icon": "user-o",
                     "type": 1,
                     "amount": 24
                 },
                 {
-                    "id": 3,
                     "category": "Play",
                     "icon": "service-o",
                     "type": 0,
