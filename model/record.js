@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-02-21 13:51:05
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-24 20:29:33
- * @FilePath: \backend\model\record.js
+ * @LastEditTime: 2022-03-04 10:50:16
+ * @FilePath: \Money_Back\model\record.js
  */
 
 const mongoose = require("../config/DBHelper")
@@ -17,6 +17,7 @@ var recordSchema = new Schema({
     year: Number,
     month: Number,
     day: Number,
+    week: Number,
     createAt: {
         type: Date,
         default: Date.now(),

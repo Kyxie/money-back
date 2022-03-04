@@ -1,12 +1,13 @@
 /*
  * @Date: 2022-02-21 13:26:33
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-27 14:28:16
+ * @LastEditTime: 2022-03-04 10:51:26
  * @FilePath: \Money_Back\controller\RecordController.js
  */
 
 const { getJWTPayload } = require("../common/util")
 const Record = require("../model/record")
+const chartUtils = require("../common/chartUtils")
 
 exports.addRecord = async function (req, res) {
     const body = req.body
@@ -14,6 +15,7 @@ exports.addRecord = async function (req, res) {
     const obj = await getJWTPayload(req.get("Authorization"))
     const newRecord = new Record(body)
     newRecord.uid = obj.uid
+    newRecord.week = chartUtils.dateToWeek(newRecord.month, newRecord.day)
     console.log(newRecord)
     // Save
     const result = await newRecord.save()
