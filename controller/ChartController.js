@@ -1,12 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
-<<<<<<< HEAD
  * @LastEditors: Shaowei Sun
  * @LastEditTime: 2022-03-04 11:37:29
-=======
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 11:36:01
->>>>>>> b689e89fc1726fd246df2e4c6d9a9c041f9837ce
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
