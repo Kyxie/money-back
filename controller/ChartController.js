@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
  * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-03 19:16:12
+ * @LastEditTime: 2022-03-04 11:37:29
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -52,53 +52,28 @@ exports.getRankList = async function (req, res) {
     let response = {}
     for (let key in params) {
         if (key === "week") {
-            response.list = {}
+            response.list = []
             const { week } = params
-            let { curmonth, first_day } = chartUtils.weekToDate(week)
-            let curYear = new Date().getFullYear()
+            const curYear = new Date().getFullYear()
             Record.find(
                 {
                     uid: obj.uid,
                     year: curYear,
-                    month: curmonth,
-                    day: { $gte: first_day, $lte: first_day + 7 },
+                    week: week,
                 },
                 function (err, data) {
-                    const temp = {}
-                    let sum = 0
-                    if (err) throw error
-                    for (let dataitem of data) {
-                        for (let tempitem of temp) {
-                            if (tempitem.catagory === dataitem.catagory) {
-                                tempitem.amount =
-                                    tempitem.amount + dataitem.amount
-
-                                sum = sum + dataitem.amount
-                            } else {
-                                let component = {}
-                                component.catagory.push(dataitem.catagory)
-                                component.icon.push(dataitem.icon)
-                                component.type.push(0)
-                                component.amount.push(dataitem.amount)
-
-                                sum = sum + dataitem.amount
-
-                                temp.push(component)
-                            }
-                        }
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCatagoryRecord(data)
+                        res.send(response)
                     }
-                    for (let tempitem of temp) {
-                        tempitem.percentage.push(tempitem.amount / sum)
-                    }
-                    response.list.push(temp)
-                    res.send(response)
                 }
             )
         }
         if (key === "month") {
-            response.list = {}
+            response.list = []
             const { month } = params
-            let curYear = new Date().getFullYear()
+            const curYear = new Date().getFullYear()
             Record.find(
                 {
                     uid: obj.uid,
@@ -106,39 +81,16 @@ exports.getRankList = async function (req, res) {
                     month: month,
                 },
                 function (err, data) {
-                    const temp = {}
-                    let sum = 0
-                    if (err) throw error
-                    for (let dataitem of data) {
-                        for (let tempitem of temp) {
-                            if (tempitem.catagory === dataitem.catagory) {
-                                tempitem.amount =
-                                    tempitem.amount + dataitem.amount
-
-                                sum = sum + dataitem.amount
-                            } else {
-                                let component = {}
-                                component.catagory.push(dataitem.catagory)
-                                component.icon.push(dataitem.icon)
-                                component.type.push(0)
-                                component.amount.push(dataitem.amount)
-
-                                sum = sum + dataitem.amount
-
-                                temp.push(component)
-                            }
-                        }
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCatagoryRecord(data)
+                        res.send(response)
                     }
-                    for (let tempitem of temp) {
-                        tempitem.percentage.push(tempitem.amount / sum)
-                    }
-                    response.list.push(temp)
-                    res.send(response)
                 }
             )
         }
         if (key === "year") {
-            response.list = {}
+            response.list = []
             const { year } = params
             Record.find(
                 {
@@ -146,34 +98,11 @@ exports.getRankList = async function (req, res) {
                     year: year,
                 },
                 function (err, data) {
-                    const temp = {}
-                    let sum = 0
-                    if (err) throw error
-                    for (let dataitem of data) {
-                        for (let tempitem of temp) {
-                            if (tempitem.catagory === dataitem.catagory) {
-                                tempitem.amount =
-                                    tempitem.amount + dataitem.amount
-
-                                sum = sum + dataitem.amount
-                            } else {
-                                let component = {}
-                                component.catagory.push(dataitem.catagory)
-                                component.icon.push(dataitem.icon)
-                                component.type.push(0)
-                                component.amount.push(dataitem.amount)
-
-                                sum = sum + dataitem.amount
-
-                                temp.push(component)
-                            }
-                        }
+                    if (err) throw err
+                    else {
+                        response.list = chartUtils.resCatagoryRecord(data)
+                        res.send(response)
                     }
-                    for (let tempitem of temp) {
-                        tempitem.percentage.push(tempitem.amount / sum)
-                    }
-                    response.list.push(temp)
-                    res.send(response)
                 }
             )
         }

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-03 19:02:59
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-04 11:56:46
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -51,4 +51,43 @@ exports.weekDaysNum = function (week, date) {
         }
     }
     return daysPerWeek
+}
+
+exports.resCatagoryRecord = function (data) {
+    let temp = []
+    let sum = 0
+    for (let dataItem of data) {
+        let sign = 0
+        for (let tempItem of temp) {
+            if (tempItem.catagory === dataItem.catagory) {
+                sign = 1
+                break
+            }
+        }
+        if (sign === 1) {
+            for (let tempItem of temp) {
+                if (tempItem.catagory === dataItem.catagory) {
+                    tempItem.amount = tempItem.amount + dataItem.amount
+                    sum = sum + dataItem.amount
+                    break
+                }
+            }
+        } else {
+            let component = {}
+            component.catagory = dataItem.catagory
+            component.icon = dataItem.icon
+            component.type = 0
+            component.amount = dataItem.amount
+
+            sum = sum + dataItem.amount
+
+            temp.push(component)
+        }
+    }
+    for (let tempItem of temp) {
+        tempItem.percentage = tempItem.amount / sum
+        console.log(tempItem.percentage)
+    }
+
+    return temp
 }
