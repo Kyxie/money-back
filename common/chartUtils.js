@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 16:19:45
+ * @LastEditTime: 2022-03-04 16:48:34
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -136,11 +136,6 @@ exports.lineChartFormat = function (data) {
     dateKeys = Array.from(dateKeys).sort()
 
     for (let i = 0; i < dateKeys.length; i++) {
-        let date = detailListUtils.dateToNumber(dateKeys[i])
-        xAxis.push(date.month.toString() + "-" + date.day.toString())
-    }
-
-    for (let i = 0; i < dateKeys.length; i++) {
         dayList[dateKeys[i]] = 0
     }
 
@@ -158,5 +153,5 @@ exports.lineChartFormat = function (data) {
         dateValues.push(dayList[key])
     }
 
-    return [xAxis, dateValues]
+    return dateValues
 }
