@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-03 17:29:21
+ * @LastEditTime: 2022-03-03 19:11:36
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -19,30 +19,33 @@ exports.getLineChart = async function (req, res) {
     for (let key in params) {
         if (key === "week") {
             let date = chartUtils.weekToDate(params.week)
-
-            daysPerWeek = 7
-            if (params.week === 1) {
-                if (date.month === 12) {
-                    daysPerWeek = date.day - 25
-                }
-            } else {
-                if (date.month === 12 && date.day > 25) {
-                    daysPerWeek = 32 - date.day
-                }
+            let daysPerWeek = chartUtils.weekDaysNum(params.week, date)
+            if (daysPerWeek < 7 && params.week === "1") {
+                date.month = 1
+                date.day = 1
             }
 
-            let dateArray = []
+            let dayArray = []
             for (let i = 0; i < daysPerWeek; i++) {
                 monthNum = date.month
                 dayNum = date.day + i
-                dateArray[i] = monthNum.toString() + "-" + dayNum.toString()
+                dayArray[i] = monthNum.toString() + "-" + dayNum.toString()
             }
-            response["x-axis"] = dateArray
+            response["x-axis"] = dayArray
             res.send(response)
         } else if (key === "month") {
         } else {
+            let monthArray = []
+            for (let i = 0; i < 12; i++) {
+                monthArray[i] = (i + 1).toString()
+            }
+            response["x-axis"] = monthArray
+            res.send(response)
         }
     }
 }
 
-exports.getRankList = async function (req, res) {}
+exports.getRankList = async function (req, res) {
+    date = chartUtils.weekToDate(1)
+    console.log(date)
+}
