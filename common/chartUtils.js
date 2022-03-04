@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-04 12:44:25
+ * @LastEditTime: 2022-03-04 12:48:30
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -88,10 +88,12 @@ exports.resCategoryRecord = function (data) {
         tempItem.percentage = Math.round((tempItem.amount / sum) * 100)
     }
 
+    temp = temp.sort(ascendingSort("percentage")).reverse()
+
     return temp
 }
 
-ascendingSort = function (property) {
+function ascendingSort(property) {
     return function (obj1, obj2) {
         let value1 = obj1[property]
         let value2 = obj2[property]
