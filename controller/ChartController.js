@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-05 00:00:39
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-05 13:22:53
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -186,6 +186,7 @@ exports.getRankList = async function (req, res) {
                     uid: obj.uid,
                     year: curYear,
                     week: week,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
@@ -205,6 +206,7 @@ exports.getRankList = async function (req, res) {
                     uid: obj.uid,
                     year: curYear,
                     month: month,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
@@ -222,6 +224,7 @@ exports.getRankList = async function (req, res) {
                 {
                     uid: obj.uid,
                     year: year,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
