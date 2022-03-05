@@ -3,7 +3,7 @@
 Nodejs + Express + MongoDB，先安装node和MongoDB，node自带包管理工具npm，再用npm安装express
 
 ```shell
-$ npm install express --save
+npm install express --save
 ```
 
 ### 文件
@@ -33,8 +33,8 @@ VSCode左下角setting，搜索format，在Text Editor的formatting中打开Form
 ### 运行
 
 ```shell
-$ npm install
-$ npm start
+npm install
+npm start
 ```
 
 如果运行成功在浏览器上输入`locahost:8080`会出现

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:30:41
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-27 12:31:54
+ * @LastEditTime: 2022-03-03 16:32:57
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
@@ -63,7 +63,7 @@ exports.getDetailList = async function (req, res) {
     // const date = new Date()
     // const today = data.getDay() + 1
     // const tomonth = date.getDate()
-    var response = []
+    let response = []
     Record.find(
         {
             uid: obj.uid,
@@ -72,8 +72,8 @@ exports.getDetailList = async function (req, res) {
             if (err) throw err
 
             // All date Keys
-            var dateKeys = new Set()
-            for (var i = 0; i < docs.length; i++) {
+            let dateKeys = new Set()
+            for (let i = 0; i < docs.length; i++) {
                 dateKeys.add(
                     detailListUtils.dateToString(
                         docs[i].year,
@@ -84,13 +84,13 @@ exports.getDetailList = async function (req, res) {
             }
             dateKeys = Array.from(dateKeys).sort().reverse()
 
-            for (var i = 0; i < dateKeys.length; i++) {
-                var dateSet = detailListUtils.dateToNumber(dateKeys[i])
-                var compResponse = {}
-                var list = []
+            for (let i = 0; i < dateKeys.length; i++) {
+                let dateSet = detailListUtils.dateToNumber(dateKeys[i])
+                let compResponse = {}
+                let list = []
 
-                for (var j = 0; j < docs.length; j++) {
-                    var compList = {}
+                for (let j = 0; j < docs.length; j++) {
+                    let compList = {}
                     if (
                         docs[j].year == dateSet.year &&
                         docs[j].month == dateSet.month &&
@@ -112,9 +112,9 @@ exports.getDetailList = async function (req, res) {
                 response.push(compResponse)
             }
 
-            for (var i = 0; i < response.length; i++) {
+            for (let i = 0; i < response.length; i++) {
                 response[i].amount = 0
-                for (var j = 0; j < response[i].list.length; j++) {
+                for (let j = 0; j < response[i].list.length; j++) {
                     if (response[i].list[j].type == 0) {
                         response[i].amount =
                             response[i].amount - response[i].list[j].amount

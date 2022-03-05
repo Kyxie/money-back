@@ -1,12 +1,14 @@
 /*
  * @Date: 2022-02-21 13:26:33
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-27 14:28:16
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-04 12:00:32
  * @FilePath: \Money_Back\controller\RecordController.js
  */
 
+const { rethrow } = require("jade/lib/runtime")
 const { getJWTPayload } = require("../common/util")
 const Record = require("../model/record")
+const chartUtils = require("../common/chartUtils")
 
 exports.addRecord = async function (req, res) {
     const body = req.body
@@ -14,6 +16,7 @@ exports.addRecord = async function (req, res) {
     const obj = await getJWTPayload(req.get("Authorization"))
     const newRecord = new Record(body)
     newRecord.uid = obj.uid
+    newRecord.week = chartUtils.dateToWeek(newRecord.month, newRecord.day)
     console.log(newRecord)
     // Save
     const result = await newRecord.save()
@@ -30,10 +33,9 @@ exports.deleteRecord = async function (req, res) {
             uid: obj.uid,
             _id: _id,
         },
-        function (error) {
-            if (error) {
-                res.send({ data: "delete failed" })
-            } else {
+        function (err) {
+            if (err) throw err
+            else {
                 res.send({ code: 200 })
             }
         }
