@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
- * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-05 13:25:46
+ * @LastEditors: Kunyang Xie
+ * @LastEditTime: 2022-03-05 13:36:44
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -77,7 +77,7 @@ exports.getValidChoices = function (req, res) {
     let monthArray = new Array()
     let weekArray = new Array()
 
-    for (let i = 2017; i <= year; i++) {
+    for (let i = 2020; i <= year; i++) {
         yearArray.push(i)
     }
     for (let i = 1; i <= month; i++) {
@@ -186,7 +186,7 @@ exports.getLineChart = async function (req, res) {
                 {
                     uid: obj.uid,
                     type: 0,
-                    year: today.getFullYear(),
+                    year: params.year,
                 },
                 function (err, data) {
                     if (err) throw err
