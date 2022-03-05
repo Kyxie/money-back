@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-26 16:33:18
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-26 13:02:12
+ * @LastEditTime: 2022-03-05 09:23:17
  * @FilePath: \Money_Back\controller\LoginController.js
  */
 
@@ -9,7 +9,7 @@ const { generateToken } = require("../common/util.js")
 var User = require("../model/users")
 
 exports.Login = function (req, res) {
-    console.log(req)
+    // console.log(req)
 
     User.findOne(
         {
