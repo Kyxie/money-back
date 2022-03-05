@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-04 17:38:55
+ * @LastEditTime: 2022-03-05 00:04:36
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -31,7 +31,7 @@ exports.weekToDate = function (week) {
     const secondWeek = dat.addDays(newYear, firstWeekLen)
     const requiredStart = dat.addDays(secondWeek, 7 * (week - 2))
     var start = week == 1 ? firstOfWeek : requiredStart
-    var strArr = new list(7)
+    var strArr = new Array(7)
     for (var i = 0; i < 7; i++) {
         current = dat.addDays(start, i)
         strArr[i] = detailListUtils.dateToString(
@@ -41,15 +41,13 @@ exports.weekToDate = function (week) {
         )
     }
     return {
-        start: strArr[0],
-        end: strArr[6],
         list: strArr,
     }
 }
 
 exports.weekDaysNum = function (week, date) {
-    let startMonth = detailListUtils.dateToNumber(date.start).month
-    let startDay = detailListUtils.dateToNumber(date.start).day
+    let startMonth = detailListUtils.dateToNumber(date.list[0]).month
+    let startDay = detailListUtils.dateToNumber(date.list[0]).day
     let daysPerWeek = 7
     if (week === "1") {
         if (startMonth === 12) {
@@ -118,6 +116,7 @@ exports.sumAndAveArray = function (array) {
     for (let i = 0; i < array.length; i++) {
         sum += array[i]
     }
+
     let ave = sum / array.length
 
     sumAndAve.sum = sum
@@ -125,23 +124,16 @@ exports.sumAndAveArray = function (array) {
     return sumAndAve
 }
 
-exports.lineChartFormat = function (data) {
+exports.lineChartFormatWeek = function (data, date, daysPerWeek) {
     let dayList = new Map()
-    let dateKeys = new Set()
+    let dateKeys = new Array()
     let dateValues = new Array()
 
-    for (let i = 0; i < data.length; i++) {
-        dateKeys.add(
-            detailListUtils.dateToString(
-                data[i].year,
-                data[i].month,
-                data[i].day
-            )
-        )
+    for (let i = 0; i < daysPerWeek; i++) {
+        dateKeys.push(date.list[i])
     }
-    dateKeys = Array.from(dateKeys).sort()
 
-    for (let i = 0; i < dateKeys.length; i++) {
+    for (let i = 0; i < daysPerWeek; i++) {
         dayList[dateKeys[i]] = 0
     }
 
@@ -168,5 +160,15 @@ exports.xAxis = function (date, daysPerWeek) {
         dayArray[i] = date.list[6 - i]
     }
     dayArray.sort()
+
+    for (let i = 0; i < daysPerWeek; i++) {
+        let monthNum = detailListUtils.dateToNumber(dayArray[i]).month
+        let dayNum = detailListUtils.dateToNumber(dayArray[i]).day
+        dayArray[i] = dayArray[i] =
+            monthNum.toString() + "-" + dayNum.toString()
+    }
+
     return dayArray
 }
+
+exports.lineChartFormatYear = function (data) {}
