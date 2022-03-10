@@ -8,6 +8,61 @@
 const { getJWTPayload } = require("../common/util")
 const Budget = require("../model/budget")
 
-exports.findBudget = async function (req, res) {}
+// if record does not exist, create one with value 0. Otherwise return the record
+findOrCreate = function (id) {
+    var myDate = new Date()
+    var data = Budget.findOne(
+        {
+            uid: id,
+            year: myDate.getFullYear(),
+            month: myDate.getMonth(),
+        }
+        // function (err, data) {
+        //     if (err) throw err
+        //     else {
+        //         console.log("fuc me")
+        //         console.log(data)
+        //         if (data != null) return data
+        //     }
+        // }
+    )
+    if (data != null) return data
+    console.log("fuc me again")
+    var body = {
+        uid: id,
+        budget: 0,
+        year: myDate.getFullYear(),
+        month: myDate.getMonth(),
+    }
+    console.log(body)
+    record = new Budget(body)
+    var result = record.save()
+    return result
+}
 
-exports.changeBudget = async function (req, res) {}
+exports.findBudget = async function (req, res) {
+    const obj = await getJWTPayload(req.get("Authorization"))
+    const uid = obj.uid
+    var result = await findOrCreate(uid)
+    return res.send({ code: 200, data: result })
+}
+
+exports.changeBudget = async function (req, res) {
+    const obj = await getJWTPayload(req.get("Authorization"))
+    const uid = obj.uid
+    let body = { budget: req.query.budget }
+    console.log(body)
+    var myDate = new Date()
+    const year = myDate.getFullYear()
+    const month = myDate.getMonth()
+    var result = await Budget.findOneAndUpdate(
+        {
+            uid: uid,
+            year: year,
+            month: month,
+        },
+        body,
+        { upsert: true, new: true }
+    )
+    res.send({ code: 200, data: result })
+}
