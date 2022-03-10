@@ -31,11 +31,7 @@ router.get("/valid-choices", ChartController.getValidChoices)
 router.get("/line-chart", ChartController.getLineChart)
 router.get("/rank-list", ChartController.getRankList)
 
-// router.get("/bill", BillController.getMonthDetail) //total income and outcome per month
-
 router.get("/budget", BudgetController.findBudget) //monthly budget
-router.post("/budget", BudgetController.addBudget)
-router.delete("/budget", BudgetController.deleteBudget)
 router.patch("/budget", BudgetController.changeBudget)
 
 router.get("/summary", SummaryController.getTotalSummary) //total bill days and total bill record's amount
