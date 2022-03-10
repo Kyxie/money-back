@@ -1,11 +1,10 @@
 /*
  * @Date: 2022-02-21 13:26:33
- * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-04 12:00:32
+ * @LastEditors: Kunyang Xie
+ * @LastEditTime: 2022-03-10 11:28:16
  * @FilePath: \Money_Back\controller\RecordController.js
  */
 
-const { rethrow } = require("jade/lib/runtime")
 const { getJWTPayload } = require("../common/util")
 const Record = require("../model/record")
 const chartUtils = require("../common/chartUtils")
