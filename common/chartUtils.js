@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-02 15:27:34
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-05 00:04:36
+ * @LastEditTime: 2022-03-05 09:58:14
  * @FilePath: \Money_Back\common\chartUtils.js
  */
 
@@ -120,7 +120,7 @@ exports.sumAndAveArray = function (array) {
     let ave = sum / array.length
 
     sumAndAve.sum = sum
-    sumAndAve.ave = ave
+    sumAndAve.ave = ave.toFixed(2)
     return sumAndAve
 }
 
@@ -171,4 +171,46 @@ exports.xAxis = function (date, daysPerWeek) {
     return dayArray
 }
 
-exports.lineChartFormatYear = function (data) {}
+exports.lineChartFormatYear = function (data) {
+    let monthList = new Map()
+    let monthValues = new Array()
+
+    for (let i = 1; i <= 12; i++) {
+        monthList[i] = 0
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        monthList[data[i].month] += data[i].amount
+    }
+
+    for (let key in monthList) {
+        monthValues.push(monthList[key])
+    }
+
+    return monthValues
+}
+
+exports.monthDaysNum = function (year, month) {
+    let date = new Date(year, month, 0)
+    let days = date.getDate()
+    return days
+}
+
+exports.lineChartFormatMonth = function (data, daysPerMonth) {
+    let dayList = new Map()
+    let dayValues = new Array()
+
+    for (let i = 1; i <= daysPerMonth; i++) {
+        dayList[i] = 0
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        dayList[data[i].day] += data[i].amount
+    }
+
+    for (let key in dayList) {
+        dayValues.push(dayList[key])
+    }
+
+    return dayValues
+}

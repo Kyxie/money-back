@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:29:15
- * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-02-28 23:24:11
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-10 14:43:56
  * @FilePath: \Money_Back\routes\index.js
  */
 
@@ -13,6 +13,8 @@ const LoginController = require("../controller/LoginController")
 const DetailController = require("../controller/DetailController")
 const RecordController = require("../controller/RecordController")
 const ChartController = require("../controller/ChartController")
+const BudgetController = require("../controller/BudgetController")
+const SummaryController = require("../controller/SummaryController")
 
 router.get("/", MainController.getMain) // Keep
 router.post("/login", LoginController.Login)
@@ -28,5 +30,10 @@ router.patch("/record", RecordController.changeRecord)
 router.get("/valid-choices", ChartController.getValidChoices)
 router.get("/line-chart", ChartController.getLineChart)
 router.get("/rank-list", ChartController.getRankList)
+
+router.get("/budget", BudgetController.findBudget) //monthly budget
+router.patch("/budget", BudgetController.changeBudget)
+
+router.get("/summary", SummaryController.getTotalSummary) //total bill days and total bill record's amount
 
 module.exports = router

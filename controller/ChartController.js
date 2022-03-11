@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-28 23:17:42
  * @LastEditors: Kunyang Xie
- * @LastEditTime: 2022-03-05 00:00:39
+ * @LastEditTime: 2022-03-05 13:36:44
  * @FilePath: \Money_Back\controller\ChartController.js
  */
 
@@ -11,7 +11,7 @@ const { getJWTPayload } = require("../common/util")
 const qs = require("qs")
 const Record = require("../model/record")
 
-exports.getValidChoices = async function (req, res) {
+exports.getValidChoices = function (req, res) {
     // // Proudly provided by Zihang Zhou
 
     // function getNowSceond() {
@@ -77,7 +77,7 @@ exports.getValidChoices = async function (req, res) {
     let monthArray = new Array()
     let weekArray = new Array()
 
-    for (let i = 2017; i <= year; i++) {
+    for (let i = 2020; i <= year; i++) {
         yearArray.push(i)
     }
     for (let i = 1; i <= month; i++) {
@@ -140,7 +140,41 @@ exports.getLineChart = async function (req, res) {
                 }
             )
         } else if (key === "month") {
-            console.log("nnn")
+            let dayArray = []
+            for (let i = 0; i < 30; i++) {
+                dayArray[i] = (i + 1).toString()
+            }
+            response["x-axis"] = dayArray
+
+            Record.find(
+                {
+                    uid: obj.uid,
+                    type: 0,
+                    year: today.getFullYear(),
+                    month: params.month,
+                },
+                function (err, data) {
+                    if (err) throw err
+
+                    let daysPerMonth = chartUtils.monthDaysNum(
+                        today.getFullYear(),
+                        parseInt(params.month)
+                    )
+
+                    let values = chartUtils.lineChartFormatMonth(
+                        data,
+                        daysPerMonth
+                    )
+                    let sumAndAve = chartUtils.sumAndAveArray(values)
+
+                    response.values = values
+                    response.total = sumAndAve.sum
+                    response.average = sumAndAve.ave
+                    res.send(response)
+
+                    console.log(daysPerMonth)
+                }
+            )
         } else if (key === "year") {
             let monthArray = []
             for (let i = 0; i < 12; i++) {
@@ -152,7 +186,7 @@ exports.getLineChart = async function (req, res) {
                 {
                     uid: obj.uid,
                     type: 0,
-                    year: today.getFullYear(),
+                    year: params.year,
                 },
                 function (err, data) {
                     if (err) throw err
@@ -186,6 +220,7 @@ exports.getRankList = async function (req, res) {
                     uid: obj.uid,
                     year: curYear,
                     week: week,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
@@ -205,6 +240,7 @@ exports.getRankList = async function (req, res) {
                     uid: obj.uid,
                     year: curYear,
                     month: month,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
@@ -222,6 +258,7 @@ exports.getRankList = async function (req, res) {
                 {
                     uid: obj.uid,
                     year: year,
+                    type: "0",
                 },
                 function (err, data) {
                     if (err) throw err
