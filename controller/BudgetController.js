@@ -14,6 +14,7 @@ const { getJWTPayload } = require("../common/util")
 const Budget = require("../model/budget")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // if record does not exist, create one with value 0. Otherwise return the record
 findOrCreate = function (id) {
     var myDate = new Date()
@@ -39,6 +40,9 @@ findOrCreate = function (id) {
 }
 =======
 // proudly provided by Xiang Fang
+=======
+// proudly provided by Xiang Fang and Zihang Zhou
+>>>>>>> 5b120a8ad0c1076ecd7a469244312b02a74a54a5
 
 // // if record does not exist, create one with value 0. Otherwise return the record
 // findOrCreate = function (id) {
