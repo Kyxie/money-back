@@ -4,8 +4,15 @@
 
 ```json
 {
-    "year": 2022,
-    "month": 2,
+    "budget": 100 //default: 0
+}
+```
+
+后端给前段发送
+
+```json
+{
+    "code": 200, // if success
     "budget": 100
 }
 ```
