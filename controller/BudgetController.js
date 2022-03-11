@@ -8,7 +8,7 @@
 const { getJWTPayload } = require("../common/util")
 const Budget = require("../model/budget")
 
-// proudly provided by Xiang Fang
+// proudly provided by Xiang Fang and Zihang Zhou
 
 // // if record does not exist, create one with value 0. Otherwise return the record
 // findOrCreate = function (id) {
