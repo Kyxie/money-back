@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-20 20:06:59
  * @LastEditors: Zihang Zhou
- * @LastEditTime: 2022-03-22 16:17:03
+ * @LastEditTime: 2022-03-22 16:47:22
  * @FilePath: \Money_Back\test\recordDeleteRecord.js
  */
 //uid: "6213f31da264bcabc69d4469"
@@ -20,11 +20,16 @@ describe("DeleteController in controller", function () {
             .get("/detail-list")
             .set({ Authorization: `Bearer ${token}` })
             .end(function (err, res) {
-                console.log("res", res.body)
+                console.log("res", res.body[0].list[0])
+
                 chai.request("http://localhost:8080")
-                    //.get()
+
+                    .delete("/record")
                     .set({ Authorization: `Bearer ${token}` })
-                    .delete("/reocrd" + res.body[0]._id)
+                    .send({ _id: res.body[0].list[0]._id })
+
+                    //.get()
+
                     .end(function (error, response) {
                         response.should.have.status(200)
                         // response.should.be.json
