@@ -1,0 +1,176 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-03-19T22:14:58.601Z",
+    "end": "2022-03-19T22:14:58.670Z",
+    "duration": 69,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c65e5c87-a8ef-45e3-ae8a-ef4e3802b183",
+      "title": "",
+      "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\monthly-balance.js",
+      "file": "\\test\\monthly-balance.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ec84170f-1759-4cab-a45d-7119de27354f",
+          "title": "monthly-balance",
+          "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\monthly-balance.js",
+          "file": "\\test\\monthly-balance.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "edb56a10-f859-48ae-9fed-2dceb1412658",
+              "title": "1.unauthorized 2.authorized 3.empty query 4.year=2022,month=2",
+              "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\monthly-balance.js",
+              "file": "\\test\\monthly-balance.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "returns status 200, normal",
+                  "fullTitle": "monthly-balance 1.unauthorized 2.authorized 3.empty query 4.year=2022,month=2 returns status 200, normal",
+                  "timedOut": false,
+                  "duration": 16,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    .then((res) => {\n        //expect(res).to.have.status(200)\n        expect(response.statusCode).to.equal(200)\n        const body = res.body\n        //console.log(body) //- not really needed, but I include them as a comment\n        done()\n    })\n    .catch((err) => done(err))",
+                  "err": {},
+                  "uuid": "ccc71704-fbff-41b4-aa2c-3f1d24fe7b40",
+                  "parentUUID": "edb56a10-f859-48ae-9fed-2dceb1412658",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "returns status 401",
+                  "fullTitle": "monthly-balance 1.unauthorized 2.authorized 3.empty query 4.year=2022,month=2 returns status 401",
+                  "timedOut": false,
+                  "duration": 14,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "request(url, function (error, response, body) {\n    expect(response.statusCode).to.equal(401) //\n    done()\n})",
+                  "err": {},
+                  "uuid": "baa62833-3e26-40bd-b809-6187c575f35a",
+                  "parentUUID": "edb56a10-f859-48ae-9fed-2dceb1412658",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "returns status 200, when parameters is empty.",
+                  "fullTitle": "monthly-balance 1.unauthorized 2.authorized 3.empty query 4.year=2022,month=2 returns status 200, when parameters is empty.",
+                  "timedOut": false,
+                  "duration": 5,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    //supertest(\"http://localhost:8080/monthly-balance\")\n    //.post(\"/monthly-balance\")\n    //.send({ year: \"2022\", month: \"2\" })\n    //.get(\"/\")\n    //.query({ n: 1 })\n    .then((res) => {\n        //expect(res).to.have.status(200)\n        expect(response.statusCode).to.equal(200)\n        const body = res.body\n        expect(body).to.include({\n            income: 0,\n            expense: 0,\n        })\n        //console.log(body) //- not really needed, but I include them as a comment\n        done()\n    })\n    .catch((err) => done(err))",
+                  "err": {},
+                  "uuid": "2db06761-3ca1-418a-9bd2-e143ef09d1d2",
+                  "parentUUID": "edb56a10-f859-48ae-9fed-2dceb1412658",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "year = 2022 month =2 ",
+                  "fullTitle": "monthly-balance 1.unauthorized 2.authorized 3.empty query 4.year=2022,month=2 year = 2022 month =2 ",
+                  "timedOut": false,
+                  "duration": 8,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// chai.request(\"http://localhost:8080\")\n//     .get(\"/monthly-balance\")\n//     .set({ Authorization: `Bearer ${token}` })\nsupertest(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    .query({ year: 2022, month: 2 })\n    .expect(200, function (err, res) {\n        if (err) {\n            console.log(err)\n            done(err)\n        } else {\n            //console.log(res.body)\n            const body = res.body\n            expect(body).to.include({\n                year: \"2022\",\n                month: \"2\",\n                income: 3910,\n                expense: 0,\n            })\n            done()\n        }\n    })",
+                  "err": {},
+                  "uuid": "5007364b-3606-4725-9216-2f013b9a94f0",
+                  "parentUUID": "edb56a10-f859-48ae-9fed-2dceb1412658",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ccc71704-fbff-41b4-aa2c-3f1d24fe7b40",
+                "baa62833-3e26-40bd-b809-6187c575f35a",
+                "2db06761-3ca1-418a-9bd2-e143ef09d1d2",
+                "5007364b-3606-4725-9216-2f013b9a94f0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 43,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.2.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.2"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.1.1"
+    }
+  }
+}
