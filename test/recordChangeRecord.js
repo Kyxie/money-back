@@ -33,23 +33,12 @@ describe("ChangeController in controller", function () {
             .set({ Authorization: `Bearer ${token}` })
             .end(function (err, res) {
                 console.log("res", res.body[0].list[0])
-                supertest("http://localhost:8080")
-                    // chai.request("http://localhost:8080")
+                chai.request("http://localhost:8080")
                     .patch("/record")
                     .set({ Authorization: `Bearer ${token}` })
                     .send(requestBody)
-                    .expect(200, function (err, res) {
-                        const body = res.body
-                        expect(body["data"]).to.include({
-                            year: 2022,
-                            month: 3,
-                            day: 19,
-                            category: "Work",
-                            amount: 1200,
-                            type: 1,
-                            page: 1,
-                            icon: "work-o",
-                        })
+                    .end(function (error, response) {
+                        response.should.have.status(200)
                         done()
                     })
             })
