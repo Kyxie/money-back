@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-18 16:17:29
  * @LastEditors: Zihang Zhou
- * @LastEditTime: 2022-03-20 18:49:20
+ * @LastEditTime: 2022-03-22 19:10:25
  * @FilePath: \Money_Back\test\monthly-balance.js
  */
 var expect = require("chai").expect
@@ -82,7 +82,7 @@ describe("monthly-balance", function () {
                         expect(body).to.include({
                             year: "2022",
                             month: "2",
-                            income: 5110,
+                            income: 9910,
                             expense: 0,
                         })
                         done()
