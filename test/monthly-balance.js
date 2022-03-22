@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-18 16:17:29
  * @LastEditors: Zihang Zhou
- * @LastEditTime: 2022-03-19 18:16:00
+ * @LastEditTime: 2022-03-20 18:49:20
  * @FilePath: \Money_Back\test\monthly-balance.js
  */
 var expect = require("chai").expect
@@ -16,7 +16,7 @@ chai.should()
 chai.use(chaiHttp)
 
 describe("monthly-balance", function () {
-    describe("1.unauthorized 2.authorized 3.empty query 4.year=2022, month=2", function () {
+    describe("1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2", function () {
         var url = "http://localhost:8080/monthly-balance"
         let token =
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjEzZjMxZGEyNjRiY2FiYzY5ZDQ0NjkiLCJpYXQiOjE2NDU0Nzc1MTF9.LKWwIjoN9zxpMscZ_Nyw6_4xImZ9XwhOEDlxekWixgQ"
@@ -82,7 +82,7 @@ describe("monthly-balance", function () {
                         expect(body).to.include({
                             year: "2022",
                             month: "2",
-                            income: 3910,
+                            income: 5110,
                             expense: 0,
                         })
                         done()
