@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-01-18 16:30:41
- * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-10 15:15:05
+ * @LastEditors: Zihang Zhou
+ * @LastEditTime: 2022-03-22 16:36:28
  * @FilePath: \Money_Back\controller\DetailController.js
  */
 
@@ -100,7 +100,7 @@ exports.getDetailList = async function (req, res) {
                         compResponse.year = docs[j].year
                         compResponse.month = docs[j].month
                         compResponse.day = docs[j].day
-                        // compList._id = docs[j]._id
+                        compList._id = docs[j]._id
                         compList.category = docs[j].category
                         compList.icon = docs[j].icon
                         compList.type = docs[j].type

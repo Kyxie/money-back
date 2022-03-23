@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-02-21 13:26:33
- * @LastEditors: Shaowei Sun
- * @LastEditTime: 2022-03-11 13:54:12
+ * @LastEditors: Zihang Zhou
+ * @LastEditTime: 2022-03-22 16:50:11
  * @FilePath: \Money_Back\controller\RecordController.js
  */
 
@@ -11,11 +11,14 @@ const chartUtils = require("../common/chartUtils")
 
 exports.addRecord = async function (req, res) {
     const body = req.body
+
     // request.header.Authorization
     const obj = await getJWTPayload(req.get("Authorization"))
     const newRecord = new Record(body)
+    //console.log(newRecord + "*****")
     newRecord.uid = obj.uid
     newRecord.week = chartUtils.dateToWeek(newRecord.month, newRecord.day)
+
     console.log(newRecord)
     // Save
     const result = await newRecord.save()
@@ -35,7 +38,7 @@ exports.deleteRecord = async function (req, res) {
         function (err) {
             if (err) throw err
             else {
-                res.send({ code: 200 })
+                res.send({ code: 200, msg: "Delete" })
             }
         }
     )

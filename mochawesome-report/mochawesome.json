@@ -1,0 +1,293 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-03-22T23:17:55.168Z",
+    "end": "2022-03-22T23:17:55.307Z",
+    "duration": 139,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b12a7295-bbf1-41e0-8412-6efdef5d747d",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "497b5788-b831-4bce-911e-27670082aca4",
+          "title": "monthly-balance",
+          "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\monthly-balance.js",
+          "file": "\\test\\monthly-balance.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "41467a94-7fdb-4883-88f5-53543a29b026",
+              "title": "1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2",
+              "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\monthly-balance.js",
+              "file": "\\test\\monthly-balance.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "returns status 200, normal",
+                  "fullTitle": "monthly-balance 1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2 returns status 200, normal",
+                  "timedOut": false,
+                  "duration": 19,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    .then((res) => {\n        //expect(res).to.have.status(200)\n        expect(response.statusCode).to.equal(200)\n        const body = res.body\n        //console.log(body) //- not really needed, but I include them as a comment\n        done()\n    })\n    .catch((err) => done(err))",
+                  "err": {},
+                  "uuid": "8827c9b0-ec22-4775-9686-d4714a67894c",
+                  "parentUUID": "41467a94-7fdb-4883-88f5-53543a29b026",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "returns status 401",
+                  "fullTitle": "monthly-balance 1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2 returns status 401",
+                  "timedOut": false,
+                  "duration": 14,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "request(url, function (error, response, body) {\n    expect(response.statusCode).to.equal(401) //\n    done()\n})",
+                  "err": {},
+                  "uuid": "5ae5b94c-7b17-4a54-ac88-e90948347eff",
+                  "parentUUID": "41467a94-7fdb-4883-88f5-53543a29b026",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "returns status 200, when parameters is empty.",
+                  "fullTitle": "monthly-balance 1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2 returns status 200, when parameters is empty.",
+                  "timedOut": false,
+                  "duration": 8,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    //supertest(\"http://localhost:8080/monthly-balance\")\n    //.post(\"/monthly-balance\")\n    //.send({ year: \"2022\", month: \"2\" })\n    //.get(\"/\")\n    //.query({ n: 1 })\n    .then((res) => {\n        //expect(res).to.have.status(200)\n        expect(response.statusCode).to.equal(200)\n        const body = res.body\n        expect(body).to.include({\n            income: 0,\n            expense: 0,\n        })\n        //console.log(body) //- not really needed, but I include them as a comment\n        done()\n    })\n    .catch((err) => done(err))",
+                  "err": {},
+                  "uuid": "bccffe5a-1c19-4599-b5d3-aa50b932a1a6",
+                  "parentUUID": "41467a94-7fdb-4883-88f5-53543a29b026",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "year = 2022 month =2 ",
+                  "fullTitle": "monthly-balance 1.authorized 2.unauthorized 3.empty query 4.year=2022, month=2 year = 2022 month =2 ",
+                  "timedOut": false,
+                  "duration": 10,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// chai.request(\"http://localhost:8080\")\n//     .get(\"/monthly-balance\")\n//     .set({ Authorization: `Bearer ${token}` })\nsupertest(\"http://localhost:8080\")\n    .get(\"/monthly-balance\")\n    .set({ Authorization: `Bearer ${token}` })\n    .query({ year: 2022, month: 2 })\n    .expect(200, function (err, res) {\n        if (err) {\n            console.log(err)\n            done(err)\n        } else {\n            //console.log(res.body)\n            const body = res.body\n            expect(body).to.include({\n                year: \"2022\",\n                month: \"2\",\n                income: 9910,\n                expense: 0,\n            })\n            done()\n        }\n    })",
+                  "err": {},
+                  "uuid": "2e056ba8-3c1f-4f3c-a34c-c879218b53d1",
+                  "parentUUID": "41467a94-7fdb-4883-88f5-53543a29b026",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "8827c9b0-ec22-4775-9686-d4714a67894c",
+                "5ae5b94c-7b17-4a54-ac88-e90948347eff",
+                "bccffe5a-1c19-4599-b5d3-aa50b932a1a6",
+                "2e056ba8-3c1f-4f3c-a34c-c879218b53d1"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 51,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "4ca45f13-2e8b-44e5-bb1a-9bef01453e79",
+          "title": "RecordController in controller",
+          "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\recordAddRecord.js",
+          "file": "\\test\\recordAddRecord.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "addRecord function",
+              "fullTitle": "RecordController in controller addRecord function",
+              "timedOut": false,
+              "duration": 12,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "supertest(\"http://localhost:8080\")\n    .post(\"/record\")\n    .set(\"Content-Type\", \"application/json\")\n    .set(\"Authorization\", `Bearer ${token}`)\n    .send({\n        year: 2022,\n        month: 3,\n        day: 20,\n        category: \"Work\",\n        amount: 1200,\n        type: 1,\n        page: 1,\n        icon: \"work-o\",\n    })\n    .expect(200, function (err, res) {\n        //console.log(res.body)\n        const body = res.body\n        expect(body).to.include.keys({\n            data: {\n                week: 12,\n                uid: \"6213f31da264bcabc69d4469\",\n            },\n        })\n        //console.log(Object.values(body[\"data\"]))\n        //console.log(body[\"data\"])\n        expect(body[\"data\"]).to.include({\n            week: 12,\n            uid: \"6213f31da264bcabc69d4469\",\n        })\n        // ({\n        //     // data: {\n        //     //     week: 12,\n        //     //     uid: \"6213f31da264bcabc69d4469\",\n        //     // },\n        //     data: {\n        //         category: \"Work\",\n        //         amount: 1200,\n        //         type: 1,\n        //         icon: \"work-o\",\n        //         year: 2022,\n        //         month: 3,\n        //         day: 20,\n        //         createAt: \"2022-03-19T22:24:36.855Z\",\n        //         //_id: \"62367218b162dcf77bec741a\",\n        //         uid: \"6213f31da264bcabc69d4469\",\n        //         week: 12,\n        //         __v: 0,\n        //     },\n        // })\n        done()\n    })",
+              "err": {},
+              "uuid": "fa1fe919-aabe-47c9-afc4-b5dc7b38c96c",
+              "parentUUID": "4ca45f13-2e8b-44e5-bb1a-9bef01453e79",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fa1fe919-aabe-47c9-afc4-b5dc7b38c96c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "408f0a4e-9aff-44b9-88bc-e9155f02a5f4",
+          "title": "ChangeController in controller",
+          "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\recordChangeRecord.js",
+          "file": "\\test\\recordChangeRecord.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "change the first one",
+              "fullTitle": "ChangeController in controller change the first one",
+              "timedOut": false,
+              "duration": 24,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/detail-list\")\n    .set({ Authorization: `Bearer ${token}` })\n    .end(function (err, res) {\n        console.log(\"res\", res.body[0].list[0])\n        chai.request(\"http://localhost:8080\")\n            .patch(\"/record\")\n            .set({ Authorization: `Bearer ${token}` })\n            .send(requestBody)\n            .end(function (error, response) {\n                response.should.have.status(200)\n                done()\n            })\n    })",
+              "err": {},
+              "uuid": "62f05a08-6fe9-4442-8f59-5cf76d22a300",
+              "parentUUID": "408f0a4e-9aff-44b9-88bc-e9155f02a5f4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "62f05a08-6fe9-4442-8f59-5cf76d22a300"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 24,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "9a07bdd3-cc71-4d5d-b378-620b3c467d04",
+          "title": "DeleteController in controller",
+          "fullFile": "C:\\Users\\phoenix\\Desktop\\Course_W\\midterm_651\\Money_Back\\test\\recordDeleteRecord.js",
+          "file": "\\test\\recordDeleteRecord.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "delete the first one",
+              "fullTitle": "DeleteController in controller delete the first one",
+              "timedOut": false,
+              "duration": 21,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai.request(\"http://localhost:8080\")\n    .get(\"/detail-list\")\n    .set({ Authorization: `Bearer ${token}` })\n    .end(function (err, res) {\n        console.log(\"res\", res.body[0].list[0])\n        chai.request(\"http://localhost:8080\")\n            .delete(\"/record\")\n            .set({ Authorization: `Bearer ${token}` })\n            .send({ _id: res.body[0].list[0]._id })\n            //.get()\n            .end(function (error, response) {\n                response.should.have.status(200)\n                // response.should.be.json\n                // response.body.should.be.a(\"object\")\n                // response.body.should.have.property(\"REMOVED\")\n                // response.body.REMOVED.should.be.a(\"object\")\n                // response.body.REMOVED.should.have.property(\"name\")\n                // response.body.REMOVED.should.have.property(\"_id\")\n                // response.body.REMOVED.name.should.equal(\"Bat\")\n                done()\n            })\n    })",
+              "err": {},
+              "uuid": "9afd11e5-1b91-45c3-8ec0-abb648d6985e",
+              "parentUUID": "9a07bdd3-cc71-4d5d-b378-620b3c467d04",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9afd11e5-1b91-45c3-8ec0-abb648d6985e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 21,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.2.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.2"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.1.1"
+    }
+  }
+}
