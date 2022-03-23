@@ -14,7 +14,7 @@
     "express": "~4.16.1",
     "express-jwt": "^6.1.1",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "jade": "^0.29.0",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^9.2.2",
     "mongoose": "^6.1.7",
