@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-03-10 11:22:31
- * @LastEditors: Zihang Zhou
- * @LastEditTime: 2022-03-11 14:12:27
+ * @LastEditors: Shaowei Sun
+ * @LastEditTime: 2022-03-26 16:46:10
  * @FilePath: \Money_Back\controller\BudgetController.js
  */
 
@@ -56,7 +56,7 @@ exports.findBudget = async function (req, res) {
                 const body = {
                     year: new Date().getFullYear(),
                     month: new Date().getMonth() + 1,
-                    budget: 0,
+                    budget: 1000, //default: 1000
                     uid: obj.uid,
                 }
                 const newRecord = new Budget(body)
