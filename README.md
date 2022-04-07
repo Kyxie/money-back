@@ -25,9 +25,7 @@ $ npm start
 
 ### Repository
 
-```shell
-$ git clone https://github.com/CocoOreo/money-management.git
-```
+[Front-end Github address](https://github.com/CocoOreo/money-management.git)
 
 ### How to run
 
